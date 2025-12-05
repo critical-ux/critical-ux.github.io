@@ -7,7 +7,7 @@
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
     
     <script src="https://cdn.tailwindcss.com"></script>
 
@@ -21,6 +21,7 @@
                         pencil: '#64748B', // Slate 500
                         accent: '#D97706', // Amber 600
                         link: '#7C3AED', // Violet 600
+                        subtle: '#94A3B8', // Slate 400
                     },
                     fontFamily: {
                         serif: ['"Playfair Display"', 'serif'],
@@ -40,15 +41,6 @@
             -moz-osx-font-smoothing: grayscale;
         }
 
-        /* Hide scrollbar for clean aesthetic in some elements */
-        .no-scrollbar::-webkit-scrollbar {
-            display: none;
-        }
-        .no-scrollbar {
-            -ms-overflow-style: none;
-            scrollbar-width: none;
-        }
-
         /* Canvas container */
         #hero-canvas-container {
             position: absolute;
@@ -58,7 +50,7 @@
             height: 100%;
             z-index: 0;
             opacity: 0.6;
-            pointer-events: none; /* Let clicks pass through */
+            pointer-events: none;
         }
 
         /* Smooth Accordion Transitions */
@@ -76,13 +68,19 @@
         .paper-card {
             background: #ffffff;
             border: 1px solid #E2E8F0;
-            border-radius: 2px; /* Minimal radius for paper feel */
+            border-radius: 2px;
             transition: transform 0.2s ease, box-shadow 0.2s ease;
         }
         .paper-card:hover {
             transform: translateY(-2px);
             box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
             border-color: #CBD5E1;
+        }
+
+        /* Hanging Indent for Bibliography */
+        .bib-entry {
+            padding-left: 1.5rem; 
+            text-indent: -1.5rem;
         }
     </style>
 </head>
@@ -91,11 +89,12 @@
     <nav class="fixed top-0 w-full bg-paper/90 backdrop-blur-sm border-b border-slate-200 z-50">
         <div class="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
             <div class="font-serif font-bold text-xl tracking-tight text-ink">Critical UX</div>
-            <div class="hidden md:flex space-x-8 text-sm font-medium text-pencil">
+            <div class="hidden md:flex space-x-6 text-sm font-medium text-pencil">
                 <a href="#objectives" class="hover:text-accent transition-colors">Objectives</a>
                 <a href="#schedule" class="hover:text-accent transition-colors">Schedule</a>
                 <a href="#modules" class="hover:text-accent transition-colors">Modules</a>
                 <a href="#glossary" class="hover:text-accent transition-colors">Glossary</a>
+                <a href="#bibliography" class="hover:text-accent transition-colors">Refs</a>
             </div>
             <a href="https://synapses.telecom-paris.fr/mes-enseignements/mes-ue/2025-26/mes-occurences/25145" target="_blank" class="text-sm font-serif italic text-link hover:underline decoration-1 underline-offset-4">
                 Register Class &rarr;
@@ -115,12 +114,11 @@
             </h1>
             <p class="text-lg md:text-xl text-pencil font-light max-w-2xl mx-auto mb-10 leading-relaxed">
                 A series of conferences to better understand digital deceptive design, dark patterns, and ethical issues in the digital world.
-                Questioning value changes in digital society and learning how to identify and mitigate them.
             </p>
             <div class="flex flex-col md:flex-row gap-4 justify-center items-center text-sm font-medium">
-                <span class="bg-ink text-white px-6 py-3 rounded-sm">Panos Mavros</span>
-                <span class="text-pencil">&</span>
-                <span class="bg-ink text-white px-6 py-3 rounded-sm">Samuel Huron</span>
+                <span class="bg-ink text-white px-6 py-3 rounded-sm shadow-md">Panos Mavros</span>
+                <span class="text-pencil font-serif italic">&</span>
+                <span class="bg-ink text-white px-6 py-3 rounded-sm shadow-md">Samuel Huron</span>
             </div>
         </div>
     </header>
@@ -135,28 +133,28 @@
             
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div class="paper-card p-8 group">
-                    <div class="w-10 h-10 bg-slate-50 border border-slate-200 flex items-center justify-center mb-4 group-hover:border-accent group-hover:text-accent transition-colors">
+                    <div class="w-10 h-10 bg-slate-50 border border-slate-200 flex items-center justify-center mb-4 group-hover:border-accent group-hover:text-accent transition-colors rounded-full">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" /></svg>
                     </div>
                     <h3 class="font-serif text-xl font-semibold mb-2">Critical View</h3>
                     <p class="text-pencil text-sm">Develop a critical perspective on interactive systems, questioning the "default" narratives of technology.</p>
                 </div>
                 <div class="paper-card p-8 group">
-                    <div class="w-10 h-10 bg-slate-50 border border-slate-200 flex items-center justify-center mb-4 group-hover:border-accent group-hover:text-accent transition-colors">
+                    <div class="w-10 h-10 bg-slate-50 border border-slate-200 flex items-center justify-center mb-4 group-hover:border-accent group-hover:text-accent transition-colors rounded-full">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064" /></svg>
                     </div>
                     <h3 class="font-serif text-xl font-semibold mb-2">Contemporary Challenges</h3>
                     <p class="text-pencil text-sm">Understand the social, environmental, and ethical challenges arising from modern UX practices.</p>
                 </div>
                 <div class="paper-card p-8 group">
-                    <div class="w-10 h-10 bg-slate-50 border border-slate-200 flex items-center justify-center mb-4 group-hover:border-accent group-hover:text-accent transition-colors">
+                    <div class="w-10 h-10 bg-slate-50 border border-slate-200 flex items-center justify-center mb-4 group-hover:border-accent group-hover:text-accent transition-colors rounded-full">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" /></svg>
                     </div>
                     <h3 class="font-serif text-xl font-semibold mb-2">Methodological Application</h3>
                     <p class="text-pencil text-sm">Apply rigorous design methods to dissect and address specific user experience problems.</p>
                 </div>
                 <div class="paper-card p-8 group">
-                    <div class="w-10 h-10 bg-slate-50 border border-slate-200 flex items-center justify-center mb-4 group-hover:border-accent group-hover:text-accent transition-colors">
+                    <div class="w-10 h-10 bg-slate-50 border border-slate-200 flex items-center justify-center mb-4 group-hover:border-accent group-hover:text-accent transition-colors rounded-full">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" /></svg>
                     </div>
                     <h3 class="font-serif text-xl font-semibold mb-2">Design Solutions</h3>
@@ -171,60 +169,99 @@
                 <div class="h-px bg-slate-200 flex-grow ml-6"></div>
             </div>
 
-            <div class="border-l border-slate-200 ml-3 space-y-10">
+            <div class="border-l border-slate-200 ml-3 space-y-12">
                 <div class="relative pl-8">
                     <div class="absolute -left-1.5 top-1.5 w-3 h-3 rounded-full bg-slate-300 ring-4 ring-white"></div>
                     <div class="text-sm font-bold text-accent uppercase tracking-wider mb-1">Jan 22</div>
-                    <h3 class="font-serif text-xl text-ink">Introduction Lecture</h3>
-                    <p class="text-pencil italic">Samuel Huron & Panos Mavros</p>
+                    
+                    <div class="flex items-start gap-4">
+                        <div class="flex -space-x-3 mt-1 shrink-0">
+                            <img src="https://ui-avatars.com/api/?name=Samuel+Huron&background=1E293B&color=fff&size=128" alt="Samuel Huron" class="w-12 h-12 rounded-full border-2 border-white">
+                            <img src="https://ui-avatars.com/api/?name=Panos+Mavros&background=64748B&color=fff&size=128" alt="Panos Mavros" class="w-12 h-12 rounded-full border-2 border-white">
+                        </div>
+                        <div>
+                            <h3 class="font-serif text-xl text-ink">Introduction Lecture</h3>
+                            <p class="text-pencil italic">Samuel Huron & Panos Mavros</p>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="relative pl-8">
                     <div class="absolute -left-1.5 top-1.5 w-3 h-3 rounded-full bg-slate-300 ring-4 ring-white"></div>
                     <div class="text-sm font-bold text-accent uppercase tracking-wider mb-1">Jan 26</div>
-                    <h3 class="font-serif text-xl text-ink">Guest Lecture 1: Colin Gray</h3>
-                    <div class="flex gap-3 mt-2">
-                        <a href="https://colingray.me/" target="_blank" class="text-xs font-semibold text-link bg-slate-50 px-2 py-1 border border-slate-200 rounded hover:bg-white">Profile</a>
-                        <a href="https://scholar.google.fr/citations?user=4teLkAcAAAAJ&hl=fr&oi=ao" target="_blank" class="text-xs font-semibold text-link bg-slate-50 px-2 py-1 border border-slate-200 rounded hover:bg-white">Papers</a>
+                    
+                    <div class="flex items-start gap-4">
+                        <img src="https://ui-avatars.com/api/?name=Colin+Gray&background=94a3b8&color=fff&size=128" alt="Colin Gray" class="w-12 h-12 rounded-full border border-slate-100 shrink-0 object-cover mt-1">
+                        <div>
+                            <h3 class="font-serif text-xl text-ink">Guest Lecture 1: Colin Gray</h3>
+                            <div class="flex gap-3 mt-2">
+                                <a href="https://colingray.me/" target="_blank" class="text-xs font-semibold text-link bg-slate-50 px-2 py-1 border border-slate-200 rounded hover:bg-white">Profile</a>
+                                <a href="https://scholar.google.fr/citations?user=4teLkAcAAAAJ&hl=fr&oi=ao" target="_blank" class="text-xs font-semibold text-link bg-slate-50 px-2 py-1 border border-slate-200 rounded hover:bg-white">Papers</a>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
                 <div class="relative pl-8">
                     <div class="absolute -left-1.5 top-1.5 w-3 h-3 rounded-full bg-slate-300 ring-4 ring-white"></div>
                     <div class="text-sm font-bold text-accent uppercase tracking-wider mb-1">Feb 05</div>
-                    <h3 class="font-serif text-xl text-ink">Guest Lecture 2: Antonio Casilli</h3>
-                    <div class="flex gap-3 mt-2">
-                        <a href="https://www.casilli.fr/" target="_blank" class="text-xs font-semibold text-link bg-slate-50 px-2 py-1 border border-slate-200 rounded hover:bg-white">Profile</a>
-                        <a href="https://scholar.google.fr/citations?user=uXUEkMIAAAAJ&hl=fr&oi=ao" target="_blank" class="text-xs font-semibold text-link bg-slate-50 px-2 py-1 border border-slate-200 rounded hover:bg-white">Papers</a>
+
+                    <div class="flex items-start gap-4">
+                        <img src="https://ui-avatars.com/api/?name=Antonio+Casilli&background=94a3b8&color=fff&size=128" alt="Antonio Casilli" class="w-12 h-12 rounded-full border border-slate-100 shrink-0 object-cover mt-1">
+                        <div>
+                            <h3 class="font-serif text-xl text-ink">Guest Lecture 2: Antonio Casilli</h3>
+                            <div class="flex gap-3 mt-2">
+                                <a href="https://www.casilli.fr/" target="_blank" class="text-xs font-semibold text-link bg-slate-50 px-2 py-1 border border-slate-200 rounded hover:bg-white">Profile</a>
+                                <a href="https://scholar.google.fr/citations?user=uXUEkMIAAAAJ&hl=fr&oi=ao" target="_blank" class="text-xs font-semibold text-link bg-slate-50 px-2 py-1 border border-slate-200 rounded hover:bg-white">Papers</a>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
                 <div class="relative pl-8">
                     <div class="absolute -left-1.5 top-1.5 w-3 h-3 rounded-full bg-slate-300 ring-4 ring-white"></div>
                     <div class="text-sm font-bold text-accent uppercase tracking-wider mb-1">Feb 12</div>
-                    <h3 class="font-serif text-xl text-ink">Guest Lecture 3: Thomas Le Goff</h3>
-                    <div class="flex gap-3 mt-2">
-                        <a href="https://thomaslegoff.wp.imt.fr/" target="_blank" class="text-xs font-semibold text-link bg-slate-50 px-2 py-1 border border-slate-200 rounded hover:bg-white">Profile</a>
-                        <a href="https://scholar.google.com/citations?user=6VCTAMYAAAAJ&hl=fr" target="_blank" class="text-xs font-semibold text-link bg-slate-50 px-2 py-1 border border-slate-200 rounded hover:bg-white">Papers</a>
+
+                    <div class="flex items-start gap-4">
+                        <img src="https://ui-avatars.com/api/?name=Thomas+Le+Goff&background=94a3b8&color=fff&size=128" alt="Thomas Le Goff" class="w-12 h-12 rounded-full border border-slate-100 shrink-0 object-cover mt-1">
+                        <div>
+                            <h3 class="font-serif text-xl text-ink">Guest Lecture 3: Thomas Le Goff</h3>
+                            <div class="flex gap-3 mt-2">
+                                <a href="https://thomaslegoff.wp.imt.fr/" target="_blank" class="text-xs font-semibold text-link bg-slate-50 px-2 py-1 border border-slate-200 rounded hover:bg-white">Profile</a>
+                                <a href="https://scholar.google.com/citations?user=6VCTAMYAAAAJ&hl=fr" target="_blank" class="text-xs font-semibold text-link bg-slate-50 px-2 py-1 border border-slate-200 rounded hover:bg-white">Papers</a>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
                 <div class="relative pl-8">
                     <div class="absolute -left-1.5 top-1.5 w-3 h-3 rounded-full bg-slate-300 ring-4 ring-white"></div>
                     <div class="text-sm font-bold text-accent uppercase tracking-wider mb-1">Feb 18</div>
-                    <h3 class="font-serif text-xl text-ink">Guest Lecture 4: Lea Mossesso</h3>
-                    <div class="flex gap-3 mt-2">
-                        <a href="https://leamosesso.ooo/" target="_blank" class="text-xs font-semibold text-link bg-slate-50 px-2 py-1 border border-slate-200 rounded hover:bg-white">Profile</a>
+
+                    <div class="flex items-start gap-4">
+                        <img src="https://ui-avatars.com/api/?name=Lea+Mossesso&background=94a3b8&color=fff&size=128" alt="Lea Mossesso" class="w-12 h-12 rounded-full border border-slate-100 shrink-0 object-cover mt-1">
+                        <div>
+                            <h3 class="font-serif text-xl text-ink">Guest Lecture 4: Lea Mossesso</h3>
+                            <div class="flex gap-3 mt-2">
+                                <a href="https://leamosesso.ooo/" target="_blank" class="text-xs font-semibold text-link bg-slate-50 px-2 py-1 border border-slate-200 rounded hover:bg-white">Profile</a>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
                 <div class="relative pl-8">
                     <div class="absolute -left-1.5 top-1.5 w-3 h-3 rounded-full bg-slate-300 ring-4 ring-white"></div>
                     <div class="text-sm font-bold text-accent uppercase tracking-wider mb-1">Mar 12</div>
-                    <h3 class="font-serif text-xl text-ink">Guest Lecture 5: Alejandra Gomez Ortega</h3>
-                    <div class="flex gap-3 mt-2">
-                        <a href="https://www.su.se/english/profiles/a/algo6294" target="_blank" class="text-xs font-semibold text-link bg-slate-50 px-2 py-1 border border-slate-200 rounded hover:bg-white">Profile</a>
-                        <a href="https://scholar.google.com/citations?user=VnAL3LoAAAAJ&hl=en" target="_blank" class="text-xs font-semibold text-link bg-slate-50 px-2 py-1 border border-slate-200 rounded hover:bg-white">Papers</a>
+
+                    <div class="flex items-start gap-4">
+                        <img src="https://ui-avatars.com/api/?name=Alejandra+Gomez&background=94a3b8&color=fff&size=128" alt="Alejandra Gomez Ortega" class="w-12 h-12 rounded-full border border-slate-100 shrink-0 object-cover mt-1">
+                        <div>
+                            <h3 class="font-serif text-xl text-ink">Guest Lecture 5: Alejandra Gomez Ortega</h3>
+                            <div class="flex gap-3 mt-2">
+                                <a href="https://www.su.se/english/profiles/a/algo6294" target="_blank" class="text-xs font-semibold text-link bg-slate-50 px-2 py-1 border border-slate-200 rounded hover:bg-white">Profile</a>
+                                <a href="https://scholar.google.com/citations?user=VnAL3LoAAAAJ&hl=en" target="_blank" class="text-xs font-semibold text-link bg-slate-50 px-2 py-1 border border-slate-200 rounded hover:bg-white">Papers</a>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
@@ -346,6 +383,78 @@
             </div>
         </section>
 
+        <section id="bibliography">
+            <div class="flex flex-col md:flex-row justify-between items-baseline mb-12">
+                <h2 class="font-serif text-3xl font-bold text-ink">References & Bibliography</h2>
+                <div class="h-px bg-slate-200 flex-grow ml-6"></div>
+            </div>
+            
+            <div class="paper-card p-10 max-w-5xl mx-auto">
+                <ul class="space-y-4 text-sm text-ink leading-relaxed font-serif">
+                    
+                    <li class="bib-entry">
+                        Barab, S. A., Thomas, M. K., Dodge, T., Squire, K., & Newell, M. (2004). Critical design ethnography: Designing for change. <em>Anthropology & Education Quarterly</em>, 35(2), 254-268.
+                    </li>
+
+                    <li class="bib-entry">
+                        Bardzell, J., & Bardzell, S. (2013, April). What is "critical" about critical design? <em>Proceedings of the SIGCHI conference on human factors in computing systems</em> (pp. 3297-3306).
+                    </li>
+
+                    <li class="bib-entry">
+                        Bardzell, S., Bardzell, J., Forlizzi, J., Zimmerman, J., & Antanitis, J. (2012, June). Critical design and critical theory: the challenge of designing for provocation. <em>Proceedings of the designing interactive systems conference</em> (pp. 288-297).
+                    </li>
+
+                    <li class="bib-entry">
+                        Boer, L., & Donovan, J. (2012, June). Provotypes for participatory innovation. <em>Proceedings of the designing interactive systems conference</em> (pp. 388-397).
+                    </li>
+
+                    <li class="bib-entry">
+                        Casilli, A. A. (2019). <em>En attendant les robots-Enquête sur le travail du clic</em>. Média Diffusion.
+                    </li>
+
+                    <li class="bib-entry">
+                        Desjardins, A., Tomico, O., Lucero, A., Cecchinato, M. E., & Neustaedter, C. (2021). Introduction to the special issue on first-person methods in HCI. <em>ACM Transactions on Computer-Human Interaction (TOCHI)</em>, 28(6), 1-12.
+                    </li>
+
+                    <li class="bib-entry">
+                        Gómez Ortega, A., Genç, H. U., van der Maden, W., Comber, R., Lampinen, A., ... (2025). Photo BOO-th: Designing Visceral Encounters with Synthetic Intimate Imagery. <em>Companion Publication of the 2025 ACM Designing Interactive Systems</em>.
+                    </li>
+
+                    <li class="bib-entry">
+                        Gómez Ortega, A., Campo Woytuk, N., Park, J. Y., Tuli, A., Yadav, D., ... (2025). Designing for Secondary Users of Intimate Technologies. <em>Proceedings of the 2025 ACM Designing Interactive Systems Conference</em>.
+                    </li>
+
+                    <li class="bib-entry">
+                        Gray, C. M., Kou, Y., Battles, B., Hoggatt, J., & Toombs, A. L. (2018). The dark (patterns) side of UX design. <em>Proceedings of the 2018 CHI Conference on Human Factors in Computing Systems</em>.
+                    </li>
+
+                    <li class="bib-entry">
+                        Gray, C. M., Santos, C., Bielova, N., Toth, M., & Clifford, D. (2021). Dark Patterns and the Legal Requirements of Consent Banners: An Interaction Criticism Perspective. <em>CHI’21: Proceedings of the 2021 CHI Conference on Human Factors in Computing Systems</em>.
+                    </li>
+
+                    <li class="bib-entry">
+                        Greenberg, S., Carpendale, S., Marquardt, N., & Buxton, B. (2012). <em>Sketching user experiences: The workbook</em>. Elsevier.
+                    </li>
+
+                    <li class="bib-entry">
+                        Mackay, W. E. (1988, April). Video Prototyping: a technique for developing hypermedia systems. <em>CHI’88 Conference Companion Human Factors in Computing Systems</em> (Vol. 5, pp. 1-3).
+                    </li>
+
+                    <li class="bib-entry">
+                        Mah, K., Loke, L., & Hespanhol, L. Towards a contemplative research framework for training self-observation in HCI: A study of compassion cultivation.
+                    </li>
+
+                    <li class="bib-entry">
+                        Millen, D. R. (2000, August). Rapid ethnography: time deepening strategies for HCI field research. <em>Proceedings of the 3rd conference on Designing interactive systems: processes, practices, methods, and techniques</em> (pp. 280-286).
+                    </li>
+
+                    <li class="bib-entry">
+                        Premier Parallèle. (n.d.). <a href="https://www.premierparallele.fr/livre/exercices-dobservation" target="_blank" class="text-link hover:underline">Exercices d'observation: Dans les pas des anthropologues, des écrivains, des designers et des naturalistes du quotidien</a>.
+                    </li>
+                </ul>
+            </div>
+        </section>
+
     </main>
 
     <footer class="bg-ink text-slate-300 py-16">
@@ -389,8 +498,6 @@
 
         /**
          * Canvas Simulation: "Infinite Scroll of Dark Patterns"
-         * Visualizes floating UI elements (buttons, toggles, checkboxes)
-         * drifting upwards like an endless feed.
          */
         const canvas = document.getElementById('hero-canvas');
         const ctx = canvas.getContext('2d');
