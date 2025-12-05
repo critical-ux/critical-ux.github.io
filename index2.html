@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Critical User Experience | Mavros & Huron</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        paper: '#FDFCF8',
+                        ink: '#1E293B', // Slate 800
+                        pencil: '#64748B', // Slate 500
+                        accent: '#D97706', // Amber 600
+                        link: '#7C3AED', // Violet 600
+                    },
+                    fontFamily: {
+                        serif: ['"Playfair Display"', 'serif'],
+                        sans: ['"Inter"', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Custom Styles for smooth behaviors and specific print-like details */
+        body {
+            background-color: #FDFCF8;
+            color: #1E293B;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* Hide scrollbar for clean aesthetic in some elements */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        /* Canvas container */
+        #hero-canvas-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            opacity: 0.6;
+            pointer-events: none; /* Let clicks pass through */
+        }
+
+        /* Smooth Accordion Transitions */
+        .accordion-content {
+            transition: max-height 0.3s ease-in-out, opacity 0.3s ease-in-out;
+            max-height: 0;
+            opacity: 0;
+            overflow: hidden;
+        }
+        .accordion-content.active {
+            opacity: 1;
+        }
+
+        /* Academic Card Styling */
+        .paper-card {
+            background: #ffffff;
+            border: 1px solid #E2E8F0;
+            border-radius: 2px; /* Minimal radius for paper feel */
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .paper-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+            border-color: #CBD5E1;
+        }
+    </style>
+</head>
+<body class="font-sans leading-relaxed selection:bg-accent selection:text-white relative">
+
+    <nav class="fixed top-0 w-full bg-paper/90 backdrop-blur-sm border-b border-slate-200 z-50">
+        <div class="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
+            <div class="font-serif font-bold text-xl tracking-tight text-ink">Critical UX</div>
+            <div class="hidden md:flex space-x-8 text-sm font-medium text-pencil">
+                <a href="#objectives" class="hover:text-accent transition-colors">Objectives</a>
+                <a href="#schedule" class="hover:text-accent transition-colors">Schedule</a>
+                <a href="#modules" class="hover:text-accent transition-colors">Modules</a>
+                <a href="#glossary" class="hover:text-accent transition-colors">Glossary</a>
+            </div>
+            <a href="https://synapses.telecom-paris.fr/mes-enseignements/mes-ue/2025-26/mes-occurences/25145" target="_blank" class="text-sm font-serif italic text-link hover:underline decoration-1 underline-offset-4">
+                Register Class &rarr;
+            </a>
+        </div>
+    </nav>
+
+    <header class="relative h-screen min-h-[600px] flex flex-col justify-center items-center overflow-hidden border-b border-slate-200">
+        <div id="hero-canvas-container">
+            <canvas id="hero-canvas"></canvas>
+        </div>
+
+        <div class="relative z-10 text-center max-w-4xl px-6">
+            <p class="text-accent font-medium tracking-widest uppercase text-xs mb-4">Telecom Paris • 2025</p>
+            <h1 class="font-serif text-5xl md:text-7xl font-bold text-ink mb-6 leading-tight">
+                Critical User <br/><span class="italic font-light">e</span>Xperience
+            </h1>
+            <p class="text-lg md:text-xl text-pencil font-light max-w-2xl mx-auto mb-10 leading-relaxed">
+                A series of conferences to better understand digital deceptive design, dark patterns, and ethical issues in the digital world.
+                Questioning value changes in digital society and learning how to identify and mitigate them.
+            </p>
+            <div class="flex flex-col md:flex-row gap-4 justify-center items-center text-sm font-medium">
+                <span class="bg-ink text-white px-6 py-3 rounded-sm">Panos Mavros</span>
+                <span class="text-pencil">&</span>
+                <span class="bg-ink text-white px-6 py-3 rounded-sm">Samuel Huron</span>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-6xl mx-auto px-6 py-20 space-y-24">
+
+        <section id="objectives">
+            <div class="flex flex-col md:flex-row justify-between items-baseline mb-12">
+                <h2 class="font-serif text-3xl font-bold text-ink">Course Objectives</h2>
+                <div class="h-px bg-slate-200 flex-grow ml-6"></div>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="paper-card p-8 group">
+                    <div class="w-10 h-10 bg-slate-50 border border-slate-200 flex items-center justify-center mb-4 group-hover:border-accent group-hover:text-accent transition-colors">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" /></svg>
+                    </div>
+                    <h3 class="font-serif text-xl font-semibold mb-2">Critical View</h3>
+                    <p class="text-pencil text-sm">Develop a critical perspective on interactive systems, questioning the "default" narratives of technology.</p>
+                </div>
+                <div class="paper-card p-8 group">
+                    <div class="w-10 h-10 bg-slate-50 border border-slate-200 flex items-center justify-center mb-4 group-hover:border-accent group-hover:text-accent transition-colors">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064" /></svg>
+                    </div>
+                    <h3 class="font-serif text-xl font-semibold mb-2">Contemporary Challenges</h3>
+                    <p class="text-pencil text-sm">Understand the social, environmental, and ethical challenges arising from modern UX practices.</p>
+                </div>
+                <div class="paper-card p-8 group">
+                    <div class="w-10 h-10 bg-slate-50 border border-slate-200 flex items-center justify-center mb-4 group-hover:border-accent group-hover:text-accent transition-colors">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" /></svg>
+                    </div>
+                    <h3 class="font-serif text-xl font-semibold mb-2">Methodological Application</h3>
+                    <p class="text-pencil text-sm">Apply rigorous design methods to dissect and address specific user experience problems.</p>
+                </div>
+                <div class="paper-card p-8 group">
+                    <div class="w-10 h-10 bg-slate-50 border border-slate-200 flex items-center justify-center mb-4 group-hover:border-accent group-hover:text-accent transition-colors">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" /></svg>
+                    </div>
+                    <h3 class="font-serif text-xl font-semibold mb-2">Design Solutions</h3>
+                    <p class="text-pencil text-sm">Explore and propose tangible design solutions (prototypes, provotypes) in response to ethical issues.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="schedule">
+            <div class="flex flex-col md:flex-row justify-between items-baseline mb-12">
+                <h2 class="font-serif text-3xl font-bold text-ink">Class Schedule</h2>
+                <div class="h-px bg-slate-200 flex-grow ml-6"></div>
+            </div>
+
+            <div class="border-l border-slate-200 ml-3 space-y-10">
+                <div class="relative pl-8">
+                    <div class="absolute -left-1.5 top-1.5 w-3 h-3 rounded-full bg-slate-300 ring-4 ring-white"></div>
+                    <div class="text-sm font-bold text-accent uppercase tracking-wider mb-1">Jan 22</div>
+                    <h3 class="font-serif text-xl text-ink">Introduction Lecture</h3>
+                    <p class="text-pencil italic">Samuel Huron & Panos Mavros</p>
+                </div>
+
+                <div class="relative pl-8">
+                    <div class="absolute -left-1.5 top-1.5 w-3 h-3 rounded-full bg-slate-300 ring-4 ring-white"></div>
+                    <div class="text-sm font-bold text-accent uppercase tracking-wider mb-1">Jan 26</div>
+                    <h3 class="font-serif text-xl text-ink">Guest Lecture 1: Colin Gray</h3>
+                    <div class="flex gap-3 mt-2">
+                        <a href="https://colingray.me/" target="_blank" class="text-xs font-semibold text-link bg-slate-50 px-2 py-1 border border-slate-200 rounded hover:bg-white">Profile</a>
+                        <a href="https://scholar.google.fr/citations?user=4teLkAcAAAAJ&hl=fr&oi=ao" target="_blank" class="text-xs font-semibold text-link bg-slate-50 px-2 py-1 border border-slate-200 rounded hover:bg-white">Papers</a>
+                    </div>
+                </div>
+
+                <div class="relative pl-8">
+                    <div class="absolute -left-1.5 top-1.5 w-3 h-3 rounded-full bg-slate-300 ring-4 ring-white"></div>
+                    <div class="text-sm font-bold text-accent uppercase tracking-wider mb-1">Feb 05</div>
+                    <h3 class="font-serif text-xl text-ink">Guest Lecture 2: Antonio Casilli</h3>
+                    <div class="flex gap-3 mt-2">
+                        <a href="https://www.casilli.fr/" target="_blank" class="text-xs font-semibold text-link bg-slate-50 px-2 py-1 border border-slate-200 rounded hover:bg-white">Profile</a>
+                        <a href="https://scholar.google.fr/citations?user=uXUEkMIAAAAJ&hl=fr&oi=ao" target="_blank" class="text-xs font-semibold text-link bg-slate-50 px-2 py-1 border border-slate-200 rounded hover:bg-white">Papers</a>
+                    </div>
+                </div>
+
+                <div class="relative pl-8">
+                    <div class="absolute -left-1.5 top-1.5 w-3 h-3 rounded-full bg-slate-300 ring-4 ring-white"></div>
+                    <div class="text-sm font-bold text-accent uppercase tracking-wider mb-1">Feb 12</div>
+                    <h3 class="font-serif text-xl text-ink">Guest Lecture 3: Thomas Le Goff</h3>
+                    <div class="flex gap-3 mt-2">
+                        <a href="https://thomaslegoff.wp.imt.fr/" target="_blank" class="text-xs font-semibold text-link bg-slate-50 px-2 py-1 border border-slate-200 rounded hover:bg-white">Profile</a>
+                        <a href="https://scholar.google.com/citations?user=6VCTAMYAAAAJ&hl=fr" target="_blank" class="text-xs font-semibold text-link bg-slate-50 px-2 py-1 border border-slate-200 rounded hover:bg-white">Papers</a>
+                    </div>
+                </div>
+
+                <div class="relative pl-8">
+                    <div class="absolute -left-1.5 top-1.5 w-3 h-3 rounded-full bg-slate-300 ring-4 ring-white"></div>
+                    <div class="text-sm font-bold text-accent uppercase tracking-wider mb-1">Feb 18</div>
+                    <h3 class="font-serif text-xl text-ink">Guest Lecture 4: Lea Mossesso</h3>
+                    <div class="flex gap-3 mt-2">
+                        <a href="https://leamosesso.ooo/" target="_blank" class="text-xs font-semibold text-link bg-slate-50 px-2 py-1 border border-slate-200 rounded hover:bg-white">Profile</a>
+                    </div>
+                </div>
+
+                <div class="relative pl-8">
+                    <div class="absolute -left-1.5 top-1.5 w-3 h-3 rounded-full bg-slate-300 ring-4 ring-white"></div>
+                    <div class="text-sm font-bold text-accent uppercase tracking-wider mb-1">Mar 12</div>
+                    <h3 class="font-serif text-xl text-ink">Guest Lecture 5: Alejandra Gomez Ortega</h3>
+                    <div class="flex gap-3 mt-2">
+                        <a href="https://www.su.se/english/profiles/a/algo6294" target="_blank" class="text-xs font-semibold text-link bg-slate-50 px-2 py-1 border border-slate-200 rounded hover:bg-white">Profile</a>
+                        <a href="https://scholar.google.com/citations?user=VnAL3LoAAAAJ&hl=en" target="_blank" class="text-xs font-semibold text-link bg-slate-50 px-2 py-1 border border-slate-200 rounded hover:bg-white">Papers</a>
+                    </div>
+                </div>
+
+                <div class="relative pl-8">
+                    <div class="absolute -left-1.5 top-1.5 w-3 h-3 rounded-full bg-slate-300 ring-4 ring-white"></div>
+                    <div class="text-sm font-bold text-accent uppercase tracking-wider mb-1">Mar 19</div>
+                    <h3 class="font-serif text-xl text-ink">Session 7</h3>
+                    <p class="text-pencil italic">Topic to be announced.</p>
+                </div>
+
+                <div class="relative pl-8">
+                    <div class="absolute -left-1.5 top-1.5 w-3 h-3 rounded-full bg-slate-300 ring-4 ring-white"></div>
+                    <div class="text-sm font-bold text-accent uppercase tracking-wider mb-1">Mar 26</div>
+                    <h3 class="font-serif text-xl text-ink">Final Project Presentation</h3>
+                    <p class="text-pencil">Student presentations and critique.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="modules">
+            <div class="flex flex-col md:flex-row justify-between items-baseline mb-12">
+                <h2 class="font-serif text-3xl font-bold text-ink">Assignments & Modules</h2>
+                <div class="h-px bg-slate-200 flex-grow ml-6"></div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="paper-card flex flex-col h-full">
+                    <div class="h-2 bg-gradient-to-r from-slate-300 to-slate-400"></div>
+                    <div class="p-6 flex-grow">
+                        <h4 class="text-xs font-bold text-pencil uppercase tracking-wide mb-2">Module 1</h4>
+                        <h3 class="font-serif text-2xl font-semibold mb-4 text-ink">Issue Spotting</h3>
+                        <p class="text-pencil text-sm mb-6">An exercise in identifying and categorizing deceptive patterns within existing digital interfaces.</p>
+                    </div>
+                    <div class="p-6 pt-0 mt-auto">
+                        <a href="https://docs.google.com/document/d/1bu_5IDDLuYqUIUqJxhMnKVuDcx9oQ6p7H-QIyUsht2Y/edit?tab=t.0" target="_blank" class="block w-full text-center py-2 border border-slate-300 rounded text-sm font-medium hover:bg-slate-50 hover:text-link transition-colors">View Instructions &rarr;</a>
+                    </div>
+                </div>
+
+                <div class="paper-card flex flex-col h-full">
+                    <div class="h-2 bg-gradient-to-r from-slate-400 to-slate-500"></div>
+                    <div class="p-6 flex-grow">
+                        <h4 class="text-xs font-bold text-pencil uppercase tracking-wide mb-2">Module 2</h4>
+                        <h3 class="font-serif text-2xl font-semibold mb-4 text-ink">Provotypes & Prototypes</h3>
+                        <p class="text-pencil text-sm mb-6">Designing provocative prototypes to expose or challenge underlying ethical issues in technology.</p>
+                    </div>
+                    <div class="p-6 pt-0 mt-auto">
+                        <a href="https://docs.google.com/document/d/1yaGVar9tzecQdbpJ4ki2JA6kndbcOLtjx87MzHiUmFk/edit?tab=t.0" target="_blank" class="block w-full text-center py-2 border border-slate-300 rounded text-sm font-medium hover:bg-slate-50 hover:text-link transition-colors">View Instructions &rarr;</a>
+                    </div>
+                </div>
+
+                <div class="paper-card flex flex-col h-full">
+                    <div class="h-2 bg-gradient-to-r from-slate-500 to-slate-600"></div>
+                    <div class="p-6 flex-grow">
+                        <h4 class="text-xs font-bold text-pencil uppercase tracking-wide mb-2">Module 3</h4>
+                        <h3 class="font-serif text-2xl font-semibold mb-4 text-ink">Final Project</h3>
+                        <p class="text-pencil text-sm mb-6">Comprehensive design intervention addressing a critical UX challenge, culminating in a final presentation.</p>
+                    </div>
+                    <div class="p-6 pt-0 mt-auto">
+                        <a href="https://docs.google.com/document/d/1TayAUqEuFItovNg9rDXq4ojj14QaQ1sGzp3yaI8DbCo/edit?tab=t.0" target="_blank" class="block w-full text-center py-2 border border-slate-300 rounded text-sm font-medium hover:bg-slate-50 hover:text-link transition-colors">View Instructions &rarr;</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="glossary">
+            <div class="flex flex-col md:flex-row justify-between items-baseline mb-12">
+                <h2 class="font-serif text-3xl font-bold text-ink">Key Concept Glossary</h2>
+                <div class="h-px bg-slate-200 flex-grow ml-6"></div>
+            </div>
+
+            <div class="space-y-4 max-w-3xl mx-auto">
+                <div class="border border-slate-200 rounded bg-white">
+                    <button class="accordion-header w-full px-6 py-4 text-left flex justify-between items-center focus:outline-none group">
+                        <span class="font-serif text-lg font-medium text-ink group-hover:text-accent transition-colors">Deceptive Design</span>
+                        <span class="text-slate-400 text-xl transform transition-transform duration-200">+</span>
+                    </button>
+                    <div class="accordion-content border-t border-transparent">
+                        <div class="px-6 py-4 text-pencil text-sm leading-relaxed border-t border-slate-100">
+                            User interface design choices that manipulate users into doing things they might not otherwise do, such as buying insurance or signing up for recurring bills. Often synonymous with "Dark Patterns" but emphasizes the intentionality of deception.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="border border-slate-200 rounded bg-white">
+                    <button class="accordion-header w-full px-6 py-4 text-left flex justify-between items-center focus:outline-none group">
+                        <span class="font-serif text-lg font-medium text-ink group-hover:text-accent transition-colors">Dark Patterns</span>
+                        <span class="text-slate-400 text-xl transform transition-transform duration-200">+</span>
+                    </button>
+                    <div class="accordion-content border-t border-transparent">
+                        <div class="px-6 py-4 text-pencil text-sm leading-relaxed border-t border-slate-100">
+                            A term coined by Harry Brignull in 2010. It refers to features of interface design crafted to trick users into doing things, like buying a more expensive item or sharing more data than intended.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="border border-slate-200 rounded bg-white">
+                    <button class="accordion-header w-full px-6 py-4 text-left flex justify-between items-center focus:outline-none group">
+                        <span class="font-serif text-lg font-medium text-ink group-hover:text-accent transition-colors">Critical Theory</span>
+                        <span class="text-slate-400 text-xl transform transition-transform duration-200">+</span>
+                    </button>
+                    <div class="accordion-content border-t border-transparent">
+                        <div class="px-6 py-4 text-pencil text-sm leading-relaxed border-t border-slate-100">
+                            A social theory oriented toward critiquing and changing society as a whole. In the context of UX, it involves analyzing the power structures, biases, and societal impacts embedded within technological artifacts and design processes.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="border border-slate-200 rounded bg-white">
+                    <button class="accordion-header w-full px-6 py-4 text-left flex justify-between items-center focus:outline-none group">
+                        <span class="font-serif text-lg font-medium text-ink group-hover:text-accent transition-colors">Ethical Issues</span>
+                        <span class="text-slate-400 text-xl transform transition-transform duration-200">+</span>
+                    </button>
+                    <div class="accordion-content border-t border-transparent">
+                        <div class="px-6 py-4 text-pencil text-sm leading-relaxed border-t border-slate-100">
+                            Moral challenges arising in digital design, including privacy violations, addiction mechanisms (like infinite scroll), exclusion (accessibility), and the manipulation of user autonomy.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-ink text-slate-300 py-16">
+        <div class="max-w-4xl mx-auto px-6 text-center">
+            <h2 class="font-serif text-3xl text-white mb-6">Ready to question the interface?</h2>
+            <p class="mb-8 font-light text-slate-400">Join the class to explore the critical aspects of user experience.</p>
+            <a href="https://synapses.telecom-paris.fr/mes-enseignements/mes-ue/2025-26/mes-occurences/25145" target="_blank" class="inline-block bg-accent text-white font-medium px-8 py-4 rounded-sm hover:bg-white hover:text-ink transition-all duration-300">
+                Register for Class (Synapses)
+            </a>
+            <div class="mt-16 text-xs text-slate-600 border-t border-slate-700 pt-8">
+                <p>&copy; 2025 Telecom Paris. Digital Companion for Critical UX.</p>
+                <p class="mt-2">Panos Mavros & Samuel Huron</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        /**
+         * Accordion Logic
+         */
+        document.querySelectorAll('.accordion-header').forEach(button => {
+            button.addEventListener('click', () => {
+                const content = button.nextElementSibling;
+                const icon = button.querySelector('span:last-child');
+                
+                // Toggle active class
+                content.classList.toggle('active');
+                
+                // Animate height
+                if (content.style.maxHeight) {
+                    content.style.maxHeight = null;
+                    icon.style.transform = "rotate(0deg)";
+                    icon.textContent = "+";
+                } else {
+                    content.style.maxHeight = content.scrollHeight + "px";
+                    icon.style.transform = "rotate(45deg)";
+                    icon.textContent = "+"; // We rotate the plus to look like an X
+                }
+            });
+        });
+
+        /**
+         * Canvas Simulation: "Infinite Scroll of Dark Patterns"
+         * Visualizes floating UI elements (buttons, toggles, checkboxes)
+         * drifting upwards like an endless feed.
+         */
+        const canvas = document.getElementById('hero-canvas');
+        const ctx = canvas.getContext('2d');
+        let width, height;
+        let particles = [];
+
+        // UI Element Types
+        const TYPES = ['button', 'toggle', 'checkbox', 'card'];
+        const LABELS = ['Accept', 'Allow', 'Yes', 'Confirm', 'Enable', 'Ok'];
+        const COLORS = ['#94a3b8', '#cbd5e1', '#d97706', '#7c3aed']; // Slate, Light Slate, Amber, Violet
+
+        class Particle {
+            constructor() {
+                this.reset();
+                this.y = Math.random() * height; // Start anywhere on first load
+            }
+
+            reset() {
+                this.x = Math.random() * width;
+                this.y = height + 50;
+                this.speed = 0.2 + Math.random() * 0.5;
+                this.type = TYPES[Math.floor(Math.random() * TYPES.length)];
+                this.label = LABELS[Math.floor(Math.random() * LABELS.length)];
+                this.color = COLORS[Math.floor(Math.random() * COLORS.length)];
+                this.size = 20 + Math.random() * 40;
+                this.opacity = 0.1 + Math.random() * 0.2;
+                this.rotation = (Math.random() - 0.5) * 0.2;
+            }
+
+            update() {
+                this.y -= this.speed;
+                if (this.y < -50) {
+                    this.reset();
+                }
+            }
+
+            draw() {
+                ctx.save();
+                ctx.translate(this.x, this.y);
+                ctx.rotate(this.rotation);
+                ctx.globalAlpha = this.opacity;
+                ctx.fillStyle = this.color;
+                ctx.strokeStyle = this.color;
+
+                if (this.type === 'button') {
+                    // Draw Pill Button
+                    this.roundRect(-this.size, -this.size/3, this.size*2, this.size/1.5, 5, true, false);
+                    ctx.fillStyle = "#fff";
+                    ctx.font = "10px Inter";
+                    ctx.textAlign = "center";
+                    ctx.fillText(this.label, 0, 3);
+                } else if (this.type === 'toggle') {
+                    // Draw Toggle Switch
+                    this.roundRect(-this.size/1.5, -this.size/4, this.size*1.3, this.size/2, 10, true, false);
+                    ctx.beginPath();
+                    ctx.arc(this.size/3, 0, this.size/3, 0, Math.PI*2);
+                    ctx.fillStyle = "#fff";
+                    ctx.fill();
+                } else if (this.type === 'checkbox') {
+                    // Draw Checkbox
+                    ctx.strokeRect(-this.size/2, -this.size/2, this.size, this.size);
+                    if(Math.random() > 0.5) {
+                        ctx.font = "14px Inter";
+                        ctx.fillStyle = this.color;
+                        ctx.fillText("✓", -3, 5);
+                    }
+                } else {
+                    // Draw Mini Card
+                    ctx.fillStyle = "#fff";
+                    ctx.shadowColor = "rgba(0,0,0,0.1)";
+                    ctx.shadowBlur = 5;
+                    this.roundRect(-this.size, -this.size, this.size*2, this.size*2, 2, true, true);
+                    // Lines representing text
+                    ctx.fillStyle = "#e2e8f0";
+                    ctx.fillRect(-this.size + 5, -this.size + 5, this.size*1.5, 4);
+                    ctx.fillRect(-this.size + 5, -this.size + 15, this.size, 4);
+                }
+
+                ctx.restore();
+            }
+
+            // Helper for rounded rectangles
+            roundRect(x, y, w, h, r, fill = false, stroke = false) {
+                if (w < 2 * r) r = w / 2;
+                if (h < 2 * r) r = h / 2;
+                ctx.beginPath();
+                ctx.moveTo(x + r, y);
+                ctx.arcTo(x + w, y, x + w, y + h, r);
+                ctx.arcTo(x + w, y + h, x, y + h, r);
+                ctx.arcTo(x, y + h, x, y, r);
+                ctx.arcTo(x, y, x + w, y, r);
+                ctx.closePath();
+                if (fill) ctx.fill();
+                if (stroke) ctx.stroke();
+            }
+        }
+
+        function initCanvas() {
+            // High DPI Scaling
+            const dpr = window.devicePixelRatio || 1;
+            const rect = document.getElementById('hero-canvas-container').getBoundingClientRect();
+            
+            canvas.width = rect.width * dpr;
+            canvas.height = rect.height * dpr;
+            
+            // CSS size
+            canvas.style.width = `${rect.width}px`;
+            canvas.style.height = `${rect.height}px`;
+            
+            ctx.scale(dpr, dpr);
+            
+            width = rect.width;
+            height = rect.height;
+
+            particles = [];
+            const particleCount = window.innerWidth < 768 ? 15 : 35;
+            for(let i=0; i<particleCount; i++) {
+                particles.push(new Particle());
+            }
+        }
+
+        function animate() {
+            ctx.clearRect(0, 0, width, height);
+            particles.forEach(p => {
+                p.update();
+                p.draw();
+            });
+            requestAnimationFrame(animate);
+        }
+
+        // Initialize and Handle Resize
+        window.addEventListener('load', () => {
+            initCanvas();
+            animate();
+        });
+        
+        let resizeTimeout;
+        window.addEventListener('resize', () => {
+            clearTimeout(resizeTimeout);
+            resizeTimeout = setTimeout(initCanvas, 100);
+        });
+
+        // Smooth Scroll Logic
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+    </script>
+</body>
+</html>
