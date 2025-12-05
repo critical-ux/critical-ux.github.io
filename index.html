@@ -1,0 +1,416 @@
+As an expert Full-Stack Developer and Design Educator, I've created a comprehensive, single-file educational website for the "Critical UX" course. This **Digital Companion** uses a clean, research-paper aesthetic with dynamic elements to cover all requirements, including a responsive layout, a complex canvas animation, and interactive components, all within a single `index.html` file using **Tailwind CSS** and **Vanilla JavaScript**.
+
+Here is the complete, runnable HTML code:
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Critical User eXperience - Digital Companion</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        /* Custom Theme and Typography */
+        :root {
+            --paper-color: #FDFCF8; /* Warm Paper */
+            --dark-text: #1a1a1a;
+            --subtle-border: #e0e0e0;
+        }
+
+        body {
+            background-color: var(--paper-color);
+            color: var(--dark-text);
+            font-family: 'Playfair Display', Georgia, serif; /* Primary serif font */
+        }
+
+        h1, h2, h3 {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-weight: 700;
+        }
+
+        p, li, a, button {
+            font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif; /* Readable sans-serif for body text */
+            font-weight: 300;
+        }
+
+        /* Custom scrollbar for aesthetic, optional */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-thumb {
+            background-color: #d1d5db; /* gray-300 */
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-track {
+            background-color: transparent;
+        }
+
+        /* Hero Canvas Styling */
+        #dark-patterns-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+        }
+
+        #hero-content {
+            position: relative;
+            z-index: 10;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Accordion Icons Rotation */
+        .accordion-icon.rotated {
+            transform: rotate(45deg);
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <header class="relative h-[60vh] md:h-[70vh] flex items-center justify-center overflow-hidden border-b border-gray-300">
+        <canvas id="dark-patterns-canvas" class="opacity-30"></canvas>
+        <div id="hero-content" class="text-center p-6 max-w-4xl mx-auto">
+            <h1 class="text-5xl md:text-7xl lg:text-8xl font-bold mb-4 leading-tight text-gray-800">
+                Critical User eXperience
+            </h1>
+            <p class="text-xl md:text-2xl text-gray-700 font-sans mt-4">
+                A series of conference to better understand **digital deceptive design**, **dark patterns** and **ethical issues** in the digital world.
+            </p>
+            <a href="https://synapses.telecom-paris.fr/mes-enseignements/mes-ue/2025-26/mes-occurences/25145" target="_blank" class="mt-8 inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-full shadow-sm text-white bg-red-600 hover:bg-red-700 transition duration-150 ease-in-out font-sans">
+                Register for the Class &rarr;
+            </a>
+            <div class="mt-4 text-sm text-gray-600 font-sans">
+                Taught by **Samuel Huron** & **Panos Mavros**
+            </div>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-4 py-12 md:py-20">
+
+        <section class="mb-16">
+            <h2 class="text-4xl font-bold mb-8 text-center text-gray-800">
+                📚 Learning Objectives
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="p-6 bg-white border border-gray-200 rounded-lg shadow-sm hover:shadow-md transition duration-300">
+                    <i class="fas fa-eye text-3xl text-violet-600 mb-3"></i>
+                    <h3 class="text-xl font-semibold mb-2 text-gray-800">Critical View</h3>
+                    <p class="text-gray-600">Develop a **critical view** of interactive systems and their underlying power structures.</p>
+                </div>
+                <div class="p-6 bg-white border border-gray-200 rounded-lg shadow-sm hover:shadow-md transition duration-300">
+                    <i class="fas fa-chart-line text-3xl text-amber-600 mb-3"></i>
+                    <h3 class="text-xl font-semibold mb-2 text-gray-800">Contemporary Challenges</h3>
+                    <p class="text-gray-600">Understand contemporary challenges arising from UX (social, environmental, etc.) of technology.</p>
+                </div>
+                <div class="p-6 bg-white border border-gray-200 rounded-lg shadow-sm hover:shadow-md transition duration-300">
+                    <i class="fas fa-hammer text-3xl text-slate-600 mb-3"></i>
+                    <h3 class="text-xl font-semibold mb-2 text-gray-800">Apply Methods</h3>
+                    <p class="text-gray-600">Apply design methods, like **provotyping**, to address these complex design challenges.</p>
+                </div>
+                <div class="p-6 bg-white border border-gray-200 rounded-lg shadow-sm hover:shadow-md transition duration-300">
+                    <i class="fas fa-lightbulb text-3xl text-teal-600 mb-3"></i>
+                    <h3 class="text-xl font-semibold mb-2 text-gray-800">Explore Solutions</h3>
+                    <p class="text-gray-600">Explore and propose innovative **design solutions** in response to identified ethical challenges.</p>
+                </div>
+            </div>
+        </section>
+
+        ---
+
+        <section class="mb-16">
+            <h2 class="text-4xl font-bold mb-8 text-center text-gray-800">
+                🗓️ Course Schedule & Guest Lectures
+            </h2>
+
+            <div class="max-w-4xl mx-auto space-y-4">
+                </div>
+        </section>
+
+        ---
+
+        <section class="mb-16">
+            <h2 class="text-4xl font-bold mb-8 text-center text-gray-800">
+                🛠️ Core Modules & Deliverables
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="p-6 bg-white border-t-4 border-violet-500 border border-gray-200 rounded-lg shadow-md">
+                    <h3 class="text-2xl font-semibold mb-3 text-gray-800">
+                        <i class="fas fa-search text-violet-500 mr-2"></i> Issue Spotting Exercise
+                    </h3>
+                    <p class="text-gray-600 mb-4">
+                        A foundational exercise to train your eye in identifying subtle and overt dark patterns and deceptive design practices in real-world applications.
+                    </p>
+                    <a href="https://docs.google.com/document/d/1bu_5IDDLuYqUIUqJxhMnKVuDcx9oQ6p7H-QIyUsht2Y/edit?tab=t.0" target="_blank" class="text-violet-600 hover:text-violet-800 font-semibold font-sans transition duration-150">
+                        View Assignment Details <i class="fas fa-external-link-alt ml-1 text-sm"></i>
+                    </a>
+                </div>
+
+                <div class="p-6 bg-white border-t-4 border-amber-500 border border-gray-200 rounded-lg shadow-md">
+                    <h3 class="text-2xl font-semibold mb-3 text-gray-800">
+                        <i class="fas fa-flask text-amber-500 mr-2"></i> Provotypes & Prototypes
+                    </h3>
+                    <p class="text-gray-600 mb-4">
+                        Learning to use **Provotypes** (provocative prototypes) as a critical tool to start conversations and challenge design assumptions, not just solve problems.
+                    </p>
+                    <a href="https://docs.google.com/document/d/1yaGVar9tzecQdbpJ4ki2JA6kndbcOLtjx87MzHiUmFk/edit?tab=t.0" target="_blank" class="text-amber-600 hover:text-amber-800 font-semibold font-sans transition duration-150">
+                        View Assignment Details <i class="fas fa-external-link-alt ml-1 text-sm"></i>
+                    </a>
+                </div>
+
+                <div class="p-6 bg-white border-t-4 border-teal-500 border border-gray-200 rounded-lg shadow-md">
+                    <h3 class="text-2xl font-semibold mb-3 text-gray-800">
+                        <i class="fas fa-project-diagram text-teal-500 mr-2"></i> Final Project
+                    </h3>
+                    <p class="text-gray-600 mb-4">
+                        A comprehensive project applying critical UX principles to address a significant ethical or societal challenge in the digital realm.
+                    </p>
+                    <a href="https://docs.google.com/document/d/1TayAUqEuFItovNg9rDXq4ojj14Qa1sGzp3yaI8DbCo/edit?tab=t.0" target="_blank" class="text-teal-600 hover:text-teal-800 font-semibold font-sans transition duration-150">
+                        View Project Brief <i class="fas fa-external-link-alt ml-1 text-sm"></i>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        ---
+
+        <section class="mb-16 max-w-3xl mx-auto">
+            <h2 class="text-4xl font-bold mb-8 text-center text-gray-800">
+                💡 Key Concept Glossary
+            </h2>
+
+            <div id="glossary-accordion" class="space-y-4">
+                </div>
+        </section>
+
+    </main>
+
+    <footer class="text-center py-8 border-t border-gray-300 text-gray-600 text-sm font-sans">
+        <p>&copy; 2024 Critical UX Companion | Panos Mavros & Samuel Huron. Built with Tailwind CSS and Vanilla JS.</p>
+    </footer>
+
+    <script>
+        // =======================================================
+        // 1. DYNAMIC CANVAS ANIMATION (Dark Patterns Simulation)
+        // =======================================================
+
+        const canvas = document.getElementById('dark-patterns-canvas');
+        const ctx = canvas.getContext('2d');
+        let dpi = window.devicePixelRatio || 1;
+        let particles = [];
+        let width, height;
+
+        const colors = {
+            slate: '#64748b',
+            violet: '#8b5cf6',
+            amber: '#fbbf24'
+        };
+
+        const particleConfig = [
+            { icon: 'X', color: colors.slate, size: 10, speed: 0.8 }, // Close/Cancel buttons
+            { icon: 'Subscribe', color: colors.violet, size: 12, speed: 1.2 }, // Hidden costs/Subscription traps
+            { icon: 'Low Stock', color: colors.amber, size: 14, speed: 1.0 } // Scarcity/Urgency
+        ];
+
+        class Particle {
+            constructor(type) {
+                this.type = type;
+                this.x = Math.random() * width;
+                this.y = Math.random() * height;
+                this.text = type.icon;
+                this.color = type.color;
+                this.size = type.size * dpi;
+                this.speed = type.speed;
+                this.alpha = Math.random() * 0.5 + 0.3; // Subtle transparency
+            }
+
+            draw() {
+                ctx.save();
+                ctx.globalAlpha = this.alpha;
+                ctx.fillStyle = this.color;
+                ctx.font = `${this.size}px sans-serif`;
+                ctx.fillText(this.text, this.x, this.y);
+                ctx.restore();
+            }
+
+            update() {
+                // Infinite vertical scroll: Particles move up
+                this.y -= this.speed * dpi;
+
+                // Reset particle to bottom when it scrolls off top
+                if (this.y < -this.size) {
+                    this.y = height + this.size;
+                    this.x = Math.random() * width; // Randomize x for fresh look
+                }
+            }
+        }
+
+        function setCanvasDimensions() {
+            width = canvas.clientWidth;
+            height = canvas.clientHeight;
+            // Scale for High-DPI/Retina
+            canvas.width = width * dpi;
+            canvas.height = height * dpi;
+            ctx.scale(dpi, dpi);
+        }
+
+        function initParticles() {
+            setCanvasDimensions();
+            particles = [];
+            const particleCount = Math.floor((width * height) / 10000); // Density control
+            for (let i = 0; i < particleCount; i++) {
+                const type = particleConfig[i % particleConfig.length];
+                particles.push(new Particle(type));
+            }
+        }
+
+        function animate() {
+            requestAnimationFrame(animate);
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            particles.forEach(p => {
+                p.update();
+                p.draw();
+            });
+        }
+
+        // Initialize and start the animation
+        window.addEventListener('resize', () => {
+            setCanvasDimensions();
+            // Re-initialize particles on resize to adjust density/position
+            initParticles();
+        });
+        initParticles();
+        animate();
+
+
+        // =======================================================
+        // 2. COURSE SCHEDULE RENDERING (Vanilla JS)
+        // =======================================================
+
+        const scheduleData = [
+            { date: "22 Janvier", title: "Introduction Lecture", speakers: "Samuel Huron & Panos Mavros" },
+            { date: "26 Janvier", title: "Guest Lecture 1", speakers: "Colin Gray", link: "https://colingray.me/", papers: "https://scholar.google.fr/citations?user=4teLkAcAAAAJ&hl=fr&oi=ao" },
+            { date: "5 Février", title: "Guest Lecture 2", speakers: "Antonio Casilli", link: "https://www.casilli.fr/", papers: "https://scholar.google.fr/citations?user=uXUEkMIAAAAJ&hl=fr&oi=ao" },
+            { date: "12 Février", title: "Guest Lecture 3", speakers: "Thomas Le Goff", link: "https://thomaslegoff.wp.imt.fr/", papers: "https://scholar.google.com/citations?user=6VCTAMYAAAAJ&hl=fr" },
+            { date: "18 Février", title: "Guest Lecture 4", speakers: "Lea Mossesso", link: "https://leamosesso.ooo/" },
+            { date: "12 Mars", title: "Guest Lecture 5", speakers: "Alejandra Gomez Ortega", link: "https://www.su.se/english/profiles/a/algo6294", papers: "https://scholar.google.com/citations?user=VnAL3LoAAAAJ&hl=en" },
+            { date: "19 Mars", title: "Lecture/Work Session", speakers: "TBD" },
+            { date: "26 Mars", title: "Final Project Presentation", speakers: "Students" },
+        ];
+
+        const scheduleContainer = document.querySelector('.max-w-4xl.mx-auto.space-y-4');
+
+        scheduleData.forEach((item, index) => {
+            const isGuestLecture = item.title.includes('Guest Lecture');
+
+            let linkHTML = '';
+            if (item.link) {
+                linkHTML += `<a href="${item.link}" target="_blank" class="text-sm text-gray-500 hover:text-gray-700 transition duration-150 ml-2">Profile <i class="fas fa-external-link-alt text-xs"></i></a>`;
+            }
+            if (item.papers) {
+                linkHTML += `<a href="${item.papers}" target="_blank" class="text-sm text-gray-500 hover:text-gray-700 transition duration-150 ml-4">Papers <i class="fas fa-graduation-cap text-xs"></i></a>`;
+            }
+
+            const card = `
+                <div class="flex flex-col md:flex-row p-4 ${isGuestLecture ? 'bg-indigo-50 border-l-4 border-indigo-600' : 'bg-white border border-gray-200'} rounded-lg shadow-sm hover:shadow-md transition duration-300">
+                    <div class="flex-shrink-0 w-full md:w-24 mb-2 md:mb-0">
+                        <span class="text-lg font-bold text-gray-900 font-sans">${item.date}</span>
+                    </div>
+                    <div class="flex-grow md:ml-6">
+                        <p class="text-xl font-semibold text-gray-800">${item.title} ${isGuestLecture ? '<i class="fas fa-microphone-alt text-indigo-600 text-base ml-1"></i>' : ''}</p>
+                        <p class="text-gray-600 font-sans italic">${item.speakers}</p>
+                        <div class="mt-1 flex flex-wrap">
+                            ${linkHTML}
+                        </div>
+                    </div>
+                </div>
+            `;
+            scheduleContainer.innerHTML += card;
+        });
+
+        // =======================================================
+        // 3. KEY CONCEPT GLOSSARY ACCORDION (Vanilla JS)
+        // =======================================================
+
+        const glossaryData = [
+            {
+                term: "Deceptive Design",
+                definition: "User interface designs that mislead users, trick them, or otherwise prevent them from making informed, authentic choices. It often aims to benefit the service provider at the user's expense."
+            },
+            {
+                term: "Dark Patterns",
+                definition: "Specific design tricks used in deceptive design, categorized by names like 'Roach Motel' (easy in, hard out), 'Sneak into Basket' (hidden costs), or 'Confirmshaming' (guilting users into an action)."
+            },
+            {
+                term: "Critical Theory",
+                definition: "A philosophical approach that critiques society and culture by applying knowledge from the social sciences and humanities. In UX, it questions technology's role in power, equity, and social change."
+            },
+            {
+                term: "Ethical Issues in UX",
+                definition: "Concerns surrounding the moral implications of design decisions, including data privacy, algorithmic bias, mental health effects (e.g., addiction), and contributing to misinformation."
+            }
+        ];
+
+        const glossaryContainer = document.getElementById('glossary-accordion');
+
+        glossaryData.forEach((item, index) => {
+            const accordionItem = document.createElement('div');
+            accordionItem.className = 'bg-white border border-gray-200 rounded-lg shadow-sm overflow-hidden';
+
+            const header = document.createElement('button');
+            header.className = 'flex justify-between items-center w-full p-5 text-left font-semibold text-xl text-gray-800 hover:bg-gray-50 transition duration-150 focus:outline-none';
+            header.setAttribute('aria-expanded', 'false');
+            header.setAttribute('aria-controls', `content-${index}`);
+            header.innerHTML = `
+                <span>${item.term}</span>
+                <i class="fas fa-plus text-lg text-gray-500 accordion-icon transition-transform duration-300"></i>
+            `;
+            header.onclick = () => toggleAccordion(header, content, icon);
+            accordionItem.appendChild(header);
+
+            const content = document.createElement('div');
+            content.id = `content-${index}`;
+            content.className = 'px-5 pb-5 pt-0 transition-all duration-300 ease-in-out max-h-0 overflow-hidden';
+            content.innerHTML = `<p class="text-gray-600 font-sans">${item.definition}</p>`;
+            accordionItem.appendChild(content);
+
+            const icon = header.querySelector('.accordion-icon');
+
+            glossaryContainer.appendChild(accordionItem);
+        });
+
+        function toggleAccordion(header, content, icon) {
+            const isExpanded = header.getAttribute('aria-expanded') === 'true';
+
+            // Collapse all others (optional: single open at a time)
+            document.querySelectorAll('#glossary-accordion [aria-expanded="true"]').forEach(btn => {
+                if (btn !== header) {
+                    const otherContent = document.getElementById(btn.getAttribute('aria-controls'));
+                    const otherIcon = btn.querySelector('.accordion-icon');
+
+                    btn.setAttribute('aria-expanded', 'false');
+                    otherContent.style.maxHeight = '0';
+                    otherIcon.classList.remove('rotated');
+                }
+            });
+
+            // Toggle current item
+            if (isExpanded) {
+                header.setAttribute('aria-expanded', 'false');
+                content.style.maxHeight = '0';
+                icon.classList.remove('rotated');
+            } else {
+                header.setAttribute('aria-expanded', 'true');
+                content.style.maxHeight = content.scrollHeight + 'px'; // Set to actual scroll height
+                icon.classList.add('rotated');
+            }
+        }
+    </script>
+
+</body>
+</html>
+```
